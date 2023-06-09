@@ -1,0 +1,178 @@
+library(readxl)
+plan_ESP1_EspNow_50m_5s_SB <- read_excel("Esp1 EspNow 50m 5s SB.xlsx")
+View(plan_ESP1_EspNow_50m_5s_SB)
+plan_ESP2_EspNow_50m_5s_SB <- read_excel("Esp2 EspNow 50m 5s SB.xlsx")
+View(plan_ESP2_EspNow_50m_5s_SB)
+plan_ESP3_EspNow_50m_5s_SB <- read_excel("Esp3 EspNow 50m 5s SB.xlsx")
+View(plan_ESP3_EspNow_50m_5s_SB)
+plan_ESP4_EspNow_50m_5s_SB <- read_excel("Esp4 EspNow 50m 5s SB.xlsx")
+View(plan_ESP4_EspNow_50m_5s_SB)
+
+plan_ESP1_EspNow_50m_5s_SB$nivel<-ifelse(plan_ESP1_EspNow_50m_5s_SB$Column9<=2.8,3,
+                                        ifelse(plan_ESP1_EspNow_50m_5s_SB$Column9<=3.2,2,1))
+
+table(plan_ESP1_EspNow_50m_5s_SB$nivel)
+
+
+plan_ESP2_EspNow_50m_5s_SB$nivel<-ifelse(plan_ESP2_EspNow_50m_5s_SB$Column9<=2.8,3,
+                                        ifelse(plan_ESP2_EspNow_50m_5s_SB$Column9<=3.2,2,1))
+
+table(plan_ESP2_EspNow_50m_5s_SB$nivel)
+
+plan_ESP3_EspNow_50m_5s_SB$nivel<-ifelse(plan_ESP3_EspNow_50m_5s_SB$Column9<=2.8,3,
+                                        ifelse(plan_ESP3_EspNow_50m_5s_SB$Column9<=3.2,2,1))
+
+table(plan_ESP3_EspNow_50m_5s_SB$nivel)
+
+plan_ESP4_EspNow_50m_5s_SB$nivel<-ifelse(plan_ESP4_EspNow_50m_5s_SB$Column9<=2.8,3,
+                                        ifelse(plan_ESP4_EspNow_50m_5s_SB$Column9<=3.2,2,1))
+
+table(plan_ESP4_EspNow_50m_5s_SB$nivel)
+
+
+
+
+
+require(lubridate)
+plan_ESP1_EspNow_50m_5s_SB$t<-(plan_ESP1_EspNow_50m_5s_SB$Column1)
+plan_ESP1_EspNow_50m_5s_SB$t0<-min((plan_ESP1_EspNow_50m_5s_SB$Column1))
+plan_ESP1_EspNow_50m_5s_SB$survt<-(plan_ESP1_EspNow_50m_5s_SB$t-plan_ESP1_EspNow_50m_5s_SB$t0)
+
+plan_ESP1_EspNow_50m_5s_SB$survt_minutos<-(plan_ESP1_EspNow_50m_5s_SB$survt)
+
+t0<-min((plan_ESP1_EspNow_50m_5s_SB$Column1))
+t<-plan_ESP1_EspNow_50m_5s_SB$Column1
+
+difftime(t0, t, tz,
+         units = c("auto", "secs", "mins", "hours",
+                   "days", "weeks"))
+
+plan_ESP1_EspNow_50m_5s_SB$survt<-difftime(plan_ESP1_EspNow_50m_5s_SB$t, plan_ESP1_EspNow_50m_5s_SB$t0, tz,
+         units = c("mins"))
+
+
+summary(plan_ESP1_EspNow_50m_5s_SB$survt)
+
+
+plan_ESP1_EspNow_50m_5s_SB$minuto = cut(as.numeric(plan_ESP1_EspNow_50m_5s_SB$survt), c(0, 10, 20, 30, 40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360,370,380,390,400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700,710,720,730,740,750,Inf), right=FALSE)
+
+
+tapply(plan_ESP1_EspNow_50m_5s_SB$Column9,plan_ESP1_EspNow_50m_5s_SB$nivel,sd)
+tapply(plan_ESP1_EspNow_50m_5s_SB$Column9,plan_ESP1_EspNow_50m_5s_SB$minuto,sd)
+
+a<-tapply(plan_ESP1_EspNow_50m_5s_SB$Column9,list(plan_ESP1_EspNow_50m_5s_SB$minuto, plan_ESP1_EspNow_50m_5s_SB$nivel),sd)
+b<-data.frame(a)
+names(b)<-c(">3.2","<=3.2","<=2.8")
+
+# exportando saida para csv
+write.csv(b,file="saida_dp_ESP1_EspNow_50m_5s_SB.csv")
+
+#################################################################################################################################################################################
+#####################################################################################################################
+require(lubridate)
+plan_ESP2_EspNow_50m_5s_SB$t<-(plan_ESP2_EspNow_50m_5s_SB$Column1)
+plan_ESP2_EspNow_50m_5s_SB$t0<-min((plan_ESP2_EspNow_50m_5s_SB$Column1))
+plan_ESP2_EspNow_50m_5s_SB$survt<-(plan_ESP2_EspNow_50m_5s_SB$t-plan_ESP2_EspNow_50m_5s_SB$t0)
+
+plan_ESP2_EspNow_50m_5s_SB$survt_minutos<-(plan_ESP2_EspNow_50m_5s_SB$survt)
+
+t0<-min((plan_ESP2_EspNow_50m_5s_SB$Column1))
+t<-plan_ESP2_EspNow_50m_5s_SB$Column1
+
+difftime(t0, t, tz,
+         units = c("auto", "secs", "mins", "hours",
+                   "days", "weeks"))
+
+plan_ESP2_EspNow_50m_5s_SB$survt<-difftime(plan_ESP2_EspNow_50m_5s_SB$t, plan_ESP2_EspNow_50m_5s_SB$t0, tz,
+                                        units = c("mins"))
+
+
+summary(plan_ESP2_EspNow_50m_5s_SB$survt)
+
+
+plan_ESP2_EspNow_50m_5s_SB$minuto = cut(as.numeric(plan_ESP2_EspNow_50m_5s_SB$survt), c(0, 10, 20, 30, 40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360,370,380,390,400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700,710,720,730,750,Inf), right=FALSE)
+
+
+tapply(plan_ESP2_EspNow_50m_5s_SB$Column9,plan_ESP2_EspNow_50m_5s_SB$nivel,sd)
+tapply(plan_ESP2_EspNow_50m_5s_SB$Column9,plan_ESP2_EspNow_50m_5s_SB$minuto,sd)
+
+a<-tapply(plan_ESP2_EspNow_50m_5s_SB$Column9,list(plan_ESP2_EspNow_50m_5s_SB$minuto, plan_ESP2_EspNow_50m_5s_SB$nivel),sd)
+b<-data.frame(a)
+names(b)<-c(">3.2","<=3.2","<=2.8")
+
+# exportando saida para csv
+write.csv(b,file="saida_dp_ESP2_EspNow_50m_5s_SB.csv")
+
+#################################################################################################################################################################################
+#####################################################################################################################
+require(lubridate)
+plan_ESP3_EspNow_50m_5s_SB$t<-(plan_ESP3_EspNow_50m_5s_SB$Column1)
+plan_ESP3_EspNow_50m_5s_SB$t0<-min((plan_ESP3_EspNow_50m_5s_SB$Column1))
+plan_ESP3_EspNow_50m_5s_SB$survt<-(plan_ESP3_EspNow_50m_5s_SB$t-plan_ESP3_EspNow_50m_5s_SB$t0)
+
+plan_ESP3_EspNow_50m_5s_SB$survt_minutos<-(plan_ESP3_EspNow_50m_5s_SB$survt)
+
+t0<-min((plan_ESP3_EspNow_50m_5s_SB$Column1))
+t<-plan_ESP3_EspNow_50m_5s_SB$Column1
+
+difftime(t0, t, tz,
+         units = c("auto", "secs", "mins", "hours",
+                   "days", "weeks"))
+
+plan_ESP3_EspNow_50m_5s_SB$survt<-difftime(plan_ESP3_EspNow_50m_5s_SB$t, plan_ESP3_EspNow_50m_5s_SB$t0, tz,
+                                        units = c("mins"))
+
+
+summary(plan_ESP3_EspNow_50m_5s_SB$survt)
+
+
+plan_ESP3_EspNow_50m_5s_SB$minuto = cut(as.numeric(plan_ESP3_EspNow_50m_5s_SB$survt), c(0, 10, 20, 30, 40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360,370,380,390,400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700,710,720,730,740,750,Inf), right=FALSE)
+
+
+tapply(plan_ESP3_EspNow_50m_5s_SB$Column9,plan_ESP3_EspNow_50m_5s_SB$nivel,sd)
+tapply(plan_ESP3_EspNow_50m_5s_SB$Column9,plan_ESP3_EspNow_50m_5s_SB$minuto,sd)
+
+a<-tapply(plan_ESP3_EspNow_50m_5s_SB$Column9,list(plan_ESP3_EspNow_50m_5s_SB$minuto, plan_ESP3_EspNow_50m_5s_SB$nivel),sd)
+b<-data.frame(a)
+names(b)<-c(">3.2","<=3.2","<=2.8")
+
+# exportando saida para csv
+write.csv(b,file="saida_dp_ESP3_EspNow_50m_5s_SB.csv")
+
+#################################################################################################################################################################################
+#####################################################################################################################
+require(lubridate)
+plan_ESP4_EspNow_50m_5s_SB$t<-(plan_ESP4_EspNow_50m_5s_SB$Column1)
+plan_ESP4_EspNow_50m_5s_SB$t0<-min((plan_ESP4_EspNow_50m_5s_SB$Column1))
+plan_ESP4_EspNow_50m_5s_SB$survt<-(plan_ESP4_EspNow_50m_5s_SB$t-plan_ESP4_EspNow_50m_5s_SB$t0)
+
+plan_ESP4_EspNow_50m_5s_SB$survt_minutos<-(plan_ESP4_EspNow_50m_5s_SB$survt)
+
+t0<-min((plan_ESP4_EspNow_50m_5s_SB$Column1))
+t<-plan_ESP4_EspNow_50m_5s_SB$Column1
+
+difftime(t0, t, tz,
+         units = c("auto", "secs", "mins", "hours",
+                   "days", "weeks"))
+
+plan_ESP4_EspNow_50m_5s_SB$survt<-difftime(plan_ESP4_EspNow_50m_5s_SB$t, plan_ESP4_EspNow_50m_5s_SB$t0, tz,
+                                        units = c("mins"))
+
+
+summary(plan_ESP4_EspNow_50m_5s_SB$survt)
+
+
+plan_ESP4_EspNow_50m_5s_SB$minuto = cut(as.numeric(plan_ESP4_EspNow_50m_5s_SB$survt), c(0, 10, 20, 30, 40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310,320,330,340,350,360,370,380,390,400,410,420,430,440,450,460,470,480,490,500,510,520,530,540,550,560,570,580,590,600,610,620,630,640,650,660,670,680,690,700,710,720,730,740,750,Inf), right=FALSE)
+
+
+tapply(plan_ESP4_EspNow_50m_5s_SB$Column9,plan_ESP4_EspNow_50m_5s_SB$nivel,sd)
+tapply(plan_ESP4_EspNow_50m_5s_SB$Column9,plan_ESP4_EspNow_50m_5s_SB$minuto,sd)
+
+a<-tapply(plan_ESP4_EspNow_50m_5s_SB$Column9,list(plan_ESP4_EspNow_50m_5s_SB$minuto, plan_ESP4_EspNow_50m_5s_SB$nivel),sd)
+b<-data.frame(a)
+names(b)<-c(">3.2","<=3.2","<=2.8")
+
+# exportando saida para csv
+write.csv(b,file="saida_dp_ESP4_EspNow_50m_5s_SB.csv")
+
+#################################################################################################################################################################################

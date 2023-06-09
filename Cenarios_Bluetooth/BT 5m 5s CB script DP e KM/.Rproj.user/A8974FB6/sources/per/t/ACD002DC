@@ -1,0 +1,28 @@
+{
+    "id": "ACD002DC",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1627283973936.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "id": "de45ab008a6f4f8f9e7101b086232762",
+        "name": "saida",
+        "title": "saida",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7957627664983159909,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1627283973936,
+    "read_only": false,
+    "read_only_alternatives": []
+}

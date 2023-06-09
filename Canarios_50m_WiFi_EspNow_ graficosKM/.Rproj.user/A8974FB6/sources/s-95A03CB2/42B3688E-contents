@@ -1,0 +1,149 @@
+library(readxl)
+planilha_EspNow_50m_5s_CB <- read_excel("planilha EspNow 50m 5s CB.xlsx")
+planilha_EspNow_50m_5s_SB <- read_excel("planilha EspNow 50m 5s SB.xlsx")
+planilha_EspNow_50m_10s_CB <- read_excel("planilha EspNow 50m 10s CB.xlsx")
+planilha_EspNow_50m_10s_SB <- read_excel("planilha EspNow 50m 10s SB.xlsx")
+planilha_WiFi_50m_5s_CB <- read_excel("planilha WiFi 50m 5s CB.xlsx")
+planilha_WiFi_50m_5s_SB <- read_excel("planilha WiFi 50m 5s SB.xlsx")
+planilha_WiFi_50m_10s_CB <- read_excel("planilha WiFi 50m 10s CB.xlsx")
+planilha_WiFi_50m_10s_SB <- read_excel("planilha WiFi 50m 10s SB.xlsx")
+
+View(planilha_EspNow_50m_5s_CB)
+View(planilha_EspNow_50m_5s_SB)
+View(planilha_EspNow_50m_10s_CB)
+View(planilha_EspNow_50m_10s_SB)
+View(planilha_WiFi_50m_5s_CB)
+View(planilha_WiFi_50m_5s_SB)
+View(planilha_WiFi_50m_10s_CB)
+View(planilha_WiFi_50m_10s_SB)
+
+require(lubridate)
+
+planilha_EspNow_50m_5s_CB$t<-hour(planilha_EspNow_50m_5s_CB$Column1)
+planilha_EspNow_50m_5s_CB$status<-ifelse(planilha_EspNow_50m_5s_CB$Column9<=2.8,1,0)
+
+planilha_EspNow_50m_5s_SB$t<-hour(planilha_EspNow_50m_5s_SB$Column1)
+planilha_EspNow_50m_5s_SB$status<-ifelse(planilha_EspNow_50m_5s_SB$Column9<=2.8,1,0)
+
+planilha_EspNow_50m_10s_CB$t<-hour(planilha_EspNow_50m_10s_CB$Column1)
+planilha_EspNow_50m_10s_CB$status<-ifelse(planilha_EspNow_50m_10s_CB$Column9<=2.8,1,0)
+
+planilha_EspNow_50m_10s_SB$t<-hour(planilha_EspNow_50m_10s_SB$Column1)
+planilha_EspNow_50m_10s_SB$status<-ifelse(planilha_EspNow_50m_10s_SB$Column9<=2.8,1,0)
+
+planilha_WiFi_50m_5s_CB$t<-hour(planilha_WiFi_50m_5s_CB$Column1)
+planilha_WiFi_50m_5s_CB$status<-ifelse(planilha_WiFi_50m_5s_CB$Column9<=2.8,1,0)
+
+planilha_WiFi_50m_5s_SB$t<-hour(planilha_WiFi_50m_5s_SB$Column1)
+planilha_WiFi_50m_5s_SB$status<-ifelse(planilha_WiFi_50m_5s_SB$Column9<=2.8,1,0)
+
+planilha_WiFi_50m_10s_CB$t<-hour(planilha_WiFi_50m_10s_CB$Column1)
+planilha_WiFi_50m_10s_CB$status<-ifelse(planilha_WiFi_50m_10s_CB$Column9<=2.8,1,0)
+
+planilha_WiFi_50m_10s_SB$t<-hour(planilha_WiFi_50m_10s_SB$Column1)
+planilha_WiFi_50m_10s_SB$status<-ifelse(planilha_WiFi_50m_10s_SB$Column9<=2.8,1,0)
+
+planilha_WiFi_50m_5s_CB$t<-hour(planilha_WiFi_50m_5s_CB$Column1)
+planilha_WiFi_50m_5s_CB$status<-ifelse(planilha_WiFi_50m_5s_CB$Column9<=2.8,1,0)
+
+dadosEspNow_50m_5s_CB<-planilha_EspNow_50m_5s_CB[,9:10]
+dadosEspNow_50m_5s_CB$Grupo="EspNow_50m_5s_CB"
+dadosEspNow_50m_5s_CB$t0=min(dadosEspNow_50m_5s_CB$t)
+dadosEspNow_50m_5s_CB$survt<-dadosEspNow_50m_5s_CB$t-dadosEspNow_50m_5s_CB$t0
+
+dadosEspNow_50m_5s_SB<-planilha_EspNow_50m_5s_SB[,9:10]
+dadosEspNow_50m_5s_SB$Grupo="EspNow_50m_5s_SB"
+dadosEspNow_50m_5s_SB$t0=min(dadosEspNow_50m_5s_SB$t)
+dadosEspNow_50m_5s_SB$survt<-dadosEspNow_50m_5s_SB$t-dadosEspNow_50m_5s_SB$t0
+
+dadosEspNow_50m_10s_CB<-planilha_EspNow_50m_10s_CB[,9:10]
+dadosEspNow_50m_10s_CB$Grupo="EspNow_50m_10s_CB"
+dadosEspNow_50m_10s_CB$t0=min(dadosEspNow_50m_10s_CB$t)
+dadosEspNow_50m_10s_CB$survt<-dadosEspNow_50m_10s_CB$t-dadosEspNow_50m_10s_CB$t0
+
+dadosEspNow_50m_10s_SB<-planilha_EspNow_50m_10s_SB[,9:10]
+dadosEspNow_50m_10s_SB$Grupo="EspNow_50m_10s_SB"
+dadosEspNow_50m_10s_SB$t0=min(dadosEspNow_50m_10s_SB$t)
+dadosEspNow_50m_10s_SB$survt<-dadosEspNow_50m_10s_SB$t-dadosEspNow_50m_10s_SB$t0
+
+dadosWiFi_50m_5s_CB<-planilha_WiFi_50m_5s_CB[,9:10]
+dadosWiFi_50m_5s_CB$Grupo="WiFi_50m_5s_CB"
+dadosWiFi_50m_5s_CB$t0=min(dadosWiFi_50m_5s_CB$t)
+dadosWiFi_50m_5s_CB$survt<-dadosWiFi_50m_5s_CB$t-dadosWiFi_50m_5s_CB$t0
+
+dadosWiFi_50m_5s_SB<-planilha_WiFi_50m_5s_SB[,9:10]
+dadosWiFi_50m_5s_SB$Grupo="WiFi_50m_5s_SB"
+dadosWiFi_50m_5s_SB$t0=min(dadosWiFi_50m_5s_SB$t)
+dadosWiFi_50m_5s_SB$survt<-dadosWiFi_50m_5s_SB$t-dadosWiFi_50m_5s_SB$t0
+
+dadosWiFi_50m_10s_CB<-planilha_WiFi_50m_10s_CB[,9:10]
+dadosWiFi_50m_10s_CB$Grupo="WiFi_50m_10s_CB"
+dadosWiFi_50m_10s_CB$t0=min(dadosWiFi_50m_10s_CB$t)
+dadosWiFi_50m_10s_CB$survt<-dadosWiFi_50m_10s_CB$t-dadosWiFi_50m_10s_CB$t0
+
+dadosWiFi_50m_10s_SB<-planilha_WiFi_50m_10s_SB[,9:10]
+dadosWiFi_50m_10s_SB$Grupo="WiFi_50m_10s_SB"
+dadosWiFi_50m_10s_SB$t0=min(dadosWiFi_50m_10s_SB$t)
+dadosWiFi_50m_10s_SB$survt<-dadosWiFi_50m_10s_SB$t-dadosWiFi_50m_10s_SB$t0
+
+dados_50m_5m_5s_10s<-rbind.data.frame(dadosEspNow_50m_5s_CB, dadosEspNow_50m_5s_SB, dadosEspNow_50m_10s_CB, dadosEspNow_50m_10s_SB, dadosWiFi_50m_5s_CB, dadosWiFi_50m_5s_SB, dadosWiFi_50m_10s_CB, dadosWiFi_50m_10s_SB)
+dados_50m_5m_5s_10s$Grupo <- as.factor(dados_50m_5m_5s_10s$Grupo)
+dados_50m_5m_5s_10s$status <- as.numeric(dados_50m_5m_5s_10s$status)
+dados_50m_5m_5s_10s$t <- as.numeric(dados_50m_5m_5s_10s$t)
+dados_50m_5m_5s_10s$survt <- as.numeric(dados_50m_5m_5s_10s$survt)
+
+
+
+library("survival")
+# Survival times until event
+Surv(time = dados_50m_5m_5s_10s$survt, event = dados_50m_5m_5s_10s$status == 1)
+summary(Surv(time = dados_50m_5m_5s_10s$survt, event = dados_50m_5m_5s_10s$status == 1))
+
+# Surv creates survival object which is the response variable
+Y = Surv(dados_50m_5m_5s_10s$survt, dados_50m_5m_5s_10s$status)
+
+# Stratify by Grupo variable:
+kmfit = survfit(Y ~ dados_50m_5m_5s_10s$Grupo)
+
+summary(kmfit, times = c(seq(0, 23, by = 1)))
+saida<-summary(kmfit, times = c(seq(0, 23, by = 1)))
+saida2<-data.frame(saida$time,saida$n.risk,saida$n.event,saida$surv,saida$std.err,
+                   saida$lower,saida$upper)
+
+# exportando saida para csv
+write.csv(saida2,file="saida.csv")
+
+
+plot(kmfit, lty = c("solid", "dashed", "dotted", "solid", "solid", "dashed", "dotted", "solid"), col = c("black", "grey", "blue", "red", "green", "yellow", "purple", "orange"), xlab = "Survival Time In Days", ylab = "Survival Probabilities")
+legend("topright", c("EspNow_50m_5s_CB", "EspNow_50m_5s_SB","EspNow_50m_10s_CB", "EspNow_50m_10s_SB", "WiFi_50m_5s_CB", "WiFi_50m_5s_SB","WiFi_50m_10s_CB", "WiFi_50m_10s_SB" ), lty = c("solid", "dashed", "dotted", "solid", "solid", "dashed", "dotted", "solid"), col = c("black", "grey", "blue", "red", "green", "yellow", "purple", "orange"))
+
+#Metodo Log-rank
+survdiff(formula = Surv(survt, status) ~ Grupo, data = dados_50m_5m_5s_10s,  rho = 0)
+
+#Metodo Peto
+survdiff(formula = Surv(survt, status) ~ Grupo, data = dados_50m_5m_5s_10s,  rho = 1)
+
+library(ggplot2)
+library(ggfortify)
+
+model_fit <- survfit(Surv(survt, status) ~ Grupo, data = dados_50m_5m_5s_10s)
+
+autoplot(model_fit) + 
+  labs(x = "\n Tempo de Sobrevivência em horas ", y = "Probabilidade de Sobrevivência \n", 
+       title = "Tempo de Sobrevivência\n Cenarios EspNow e WiFi de 50m \n") + 
+  theme(plot.title = element_text(hjust = 0.5), 
+        axis.title.x = element_text(face="bold", colour="#FF7A33", size = 12),
+        axis.title.y = element_text(face="bold", colour="#FF7A33", size = 12),
+        legend.title = element_text(face="bold", size = 10))
+
+
+ggsave("Grafico_KM_Cenarios EspNow e WiFi de 50m.png")
+
+
+
+
+
+
+
+
+
